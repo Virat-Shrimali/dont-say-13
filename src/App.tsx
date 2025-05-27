@@ -912,87 +912,238 @@ export default function App() {
 }
 
 const styles = `
-.main-container {
-  display: flex;
-  height: 100vh;
-  background-color: #1e293b;
-  color: #f8fafc;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
-}
+  /* Main container fills viewport and applies original background gradients */
+  .main-container {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
 
-.card {
-  background-color: #334155;
-  padding: 2rem;
-  border-radius: 1rem;
-  text-align: center;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-}
+  .start-screen {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  }
 
-.card h1, .card h2 {
-  margin-bottom: 1rem;
-  font-size: 2rem;
-}
+  .game-screen {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  }
 
-button {
-  background-color: #0ea5e9;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 0.5rem;
-  margin: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
+  /* Card styling */
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    padding: 2rem 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+    text-align: center;
+    user-select: none;
+  }
 
-button:disabled {
-  background-color: #64748b;
-  cursor: not-allowed;
-}
+  /* Headings */
+  h1, h2 {
+    margin: 0 0 1.5rem;
+    color: #343a40;
+  }
 
-.number-strip {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1rem;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
+  h2 {
+    color: #3b0a45;
+  }
 
-.number-cell {
-  background-color: #475569;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  min-width: 2rem;
-  text-align: center;
-}
+  p {
+    margin: 0 0 1rem;
+    color: #495057;
+    font-size: 1.1rem;
+  }
 
-.number-cell.current {
-  background-color: #22c55e;
-  font-weight: bold;
-}
+  /* Buttons shared */
+  button {
+    background-color: #6b46c1;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.9rem 1.8rem;
+    font-size: 1.05rem;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    min-width: 120px;
+  }
 
-.current-position-container {
-  margin-bottom: 1rem;
+  button:hover:not(:disabled) {
+    background-color: #553c9a;
+  }
+
+  button:disabled,
+  button[aria-disabled="true"] {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+  }
+
+  /* Start screen buttons */
+  .start-screen button:nth-child(3) {
+    margin-bottom: 1rem;
+    background-color: #3b82f6;
+  }
+  .start-screen button:nth-child(4) {
+    background-color: #ef4444;
+  }
+  .start-screen button:nth-child(3):hover {
+    background-color: #2563eb;
+  }
+  .start-screen button:nth-child(4):hover {
+    background-color: #dc2626;
+  }
+
+  /* Number strip container */
+  .number-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  /* Number cells */
+  .number-cell {
+    flex: 1 0 30px;
+    min-width: 28px;
+    margin: 0.2rem;
+    padding: 0.6rem 0;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    color: #212529;
+    font-weight: 500;
+    text-align: center;
+    box-shadow: inset 0 0 3px #ced4da;
+    user-select: none;
+  }
+
+  .number-cell.current {
+    background-color: #d6336c;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 0 8px 2px rgba(214, 51, 108, 0.6);
+  }
+
+  /* Current position display */
+  .current-position-container p {
+    color: #5a2a6a;
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .current-position {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d6336c;
+    margin-bottom: 1.8rem;
+    user-select: none;
+  }
+
+  /* Turn info */
+  .turn-info p {
+    font-size: 1.15rem;
+    color: #4b2964;
+    margin-bottom: 1rem;
+  }
+
+  /* Buttons row */
+  .buttons-row {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .buttons-row button {
+    flex: 1 1 120px;
+  }
+
+  /* Restart button distinct color */
+  .restart-btn {
+    background-color: #db2777;
+    margin-top: 1rem;
+  }
+
+  .restart-btn:hover {
+    background-color: #be185d;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .card {
+      padding: 1.5rem 1.5rem;
+      max-width: 100%;
+    }
+
+    .current-position {
+      font-size: 2rem;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 0.75rem 1.2rem;
+      min-width: 100px;
+    }
+
+    .number-cell {
+      flex: 1 0 24px;
+      min-width: 22px;
+      font-size: 0.9rem;
+      padding: 0.45rem 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .card {
+      max-width: 560px;
+      padding: 2.5rem 3rem;
+    }
+
+    .current-position {
+      font-size: 3rem;
+    }
+
+    button {
+      font-size: 1.15rem;
+      padding: 1rem 2rem;
+      min-width: 140px;
+    }
+
+    .number-cell {
+      flex: 1 0 36px;
+      min-width: 32px;
+      font-size: 1.1rem;
+      padding: 0.7rem 0;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .card {
+      max-width: 680px;
+        padding: 3rem 4rem;
 }
 
 .current-position {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #38bdf8;
+  font-size: 3.8rem;
 }
 
-.buttons-row {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1rem 0;
+button {
+  font-size: 1.25rem;
+  padding: 1.1rem 2.4rem;
+  min-width: 160px;
 }
 
-.restart-btn {
-  margin-top: 1rem;
-  background-color: #ef4444;
+.number-cell {
+  flex: 1 0 40px;
+  min-width: 38px;
+  font-size: 1.2rem;
+  padding: 0.8rem 0;
 }
-`;
+}`;
