@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import React, { useState } from "react";
+void React;
 const losingPositions = [2, 3, 6, 7, 10, 11, 13];
 const isLosingPosition = (pos: number) => losingPositions.includes(pos);
 
