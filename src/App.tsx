@@ -1666,7 +1666,6 @@ export default function App() {
       <main className="main-container game-screen">
         <section className="card game-card">
           <h2>Don't Say 13!</h2>
-          {renderNumberStrip()}
           <div className="current-position-container">
             <p>Current Position:</p>
             <div className="current-position">{position}</div>
@@ -1701,6 +1700,8 @@ export default function App() {
           </div>
 
           <button onClick={resetGame} className="restart-btn">Restart Game</button>
+                    {renderNumberStrip()}
+
         </section>
       </main>
     </>
